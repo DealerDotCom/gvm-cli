@@ -19,7 +19,9 @@
 GVM_SERVICE="@GVM_SERVICE@"
 GVM_BROKER_SERVICE="@GVM_BROKER_SERVICE@"
 GVM_VERSION="@GVM_VERSION@"
-GVM_DIR="$HOME/.gvm"
+if [ -z "${GVM_DIR}" ]; then
+	GVM_DIR="$HOME/.gvm"
+fi
 
 # Local variables
 gvm_bin_folder="${GVM_DIR}/bin"
@@ -82,7 +84,7 @@ echo '                                                                     '
 # Sanity checks
 
 echo "Looking for a previous installation of GVM..."
-if [ -d "${GVM_DIR}" ]; then
+if [ -d "${GVM_DIR}" ] && [ -n "$(ls -A "${GVM_DIR}")" ]; then
 	echo "GVM found."
 	echo ""
 	echo "======================================================================================================"
